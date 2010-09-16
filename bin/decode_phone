@@ -1,0 +1,36 @@
+#!/usr/bin/env ruby
+
+number_plan = [
+  nil, nil,
+	'ABC',
+	'DEF',
+	'GHI',
+	'JKL',
+	'MNO',
+	'PQRS',
+	'TUV',
+	'WXYZ'
+]
+
+class NilClass
+  def include? char
+    false
+  end
+end
+
+input = ARGV.first
+input.gsub!(/\"/m, '')
+puts input
+
+chars = input.split //
+chars.each do |char|
+  case char
+  when /\d/, /[\.\-\ ]/
+    print char
+  else
+    number_plan.each_with_index do |digits, int|
+      print int if digits.include? char.upcase
+    end
+  end
+end
+puts
